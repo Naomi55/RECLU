@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="#" />  
+    <title>POSTULANTES</title>
+      
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../static/file/bootstrap/css/bootstrap.min.css">
+    <!-- CSS personalizado --> 
+    <link rel="stylesheet" href="../static/file/main.css">  
+      
+      
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../static/file/datatables/datatables.min.css"/>
+    <!--datables estilo bootstrap 4 CSS-->  
+    <link rel="stylesheet"  type="text/css" href="../static/file/datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">       
+  </head>
+    
+  <body> 
+     <header>
+<!--         <h3 class="text-center text-light">Tutorial</h3>-->
+         <h4 class="text-center text-light"><span class="badge badge-success">POSTULANTES ACEPTADOS</span></h4> 
+         <a href="http://127.0.0.1:5000/selectA" style="color: aliceblue; background-color:orange; text-align: right;">Postulantes Pedientes</a>
+         <a href="http://127.0.0.1:5000/selectC" style="color: aliceblue; background-color: crimson; text-align: right;">Postulantes Rechazados</a>
+     
+     </header>    
+      
+    <div class="container">  
+    </div>    
+    <br>  
+    <div class="container">
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-responsive"> 
+                            
+                        <table id="tablaPersonas" class="table table-striped table-bordered table-condensed" style="width:100%">
+                        <thead class="text-center">
+                            <tr>
+                                <th style="display: none;">id</th>
+                                <th>Nombre</th>
+                                <th>Edad</th>
+                                <th>Dirección</th>
+                                <th style="display: none;">Licenciatura</th>
+                                <th style="display: none;">Escuela</th>
+                                <th style="display: none;">Promedio</th>
+                                <th style="display: none;">Idiomas</th>  
+                                <th style="display: none;">Experiencia</th>
+                                <th style="display: none;">Cursos</th>
+                                <th style="display: none;">Aptitudes</th>
+                                <th >Email</th>
+                                <th  >Telefono</th>  
+                                <th  style="display: none;">Estatus</th>
+                                <th >Vacante</th>
+                                <th >cv</th>
+                                <th  >Acciones</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for postulante in postulantes %}
+                            <tr>
+                                <td style="display: none;">{{ postulante.0 }}</td> 
+                                <td >{{ postulante.1 }}</td>                                
+                                <td>{{ postulante.3 }}</td>
+                                <td>{{ postulante.4 }}</td>
+                                <td style="display: none;">{{ postulante.5 }}</td>
+                                <td style="display: none;">{{ postulante.6 }}</td>
+                                <td style="display: none;">{{ postulante.7 }}</td>
+                                <td style="display: none;">{{ postulante.8 }}</td>
+                                <td style="display: none;">{{ postulante.9 }}</td>
+                                <td style="display: none;">{{ postulante.10 }}</td>
+                                <td style="display: none;">{{ postulante.12 }}</td>
+                                <td >{{ postulante.2 }}</td>
+                                <td>{{ postulante.11 }}</td>
+                                <td style="display: none;">{{ postulante.14 }}</td>
+                                <td >{{ postulante.13 }}</td>
+                                <td >{{ postulante.15 }}</td>
+                                <td></td>                                    
+                            </tr> 
+                            {% endfor %}                               
+                        </tbody>                                     
+                    </ul>        
+                       </table>                    
+                    </div>
+                </div>
+        </div>  
+    </div>    
+      
+<!--Modal para CRUD-->
+<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <form id="formPersonas" method="GET" action="http://127.0.0.1:5000/g">    
+            <div class="modal-body">
+                <div class="form-group">
+                <label for="nombre" class="col-form-label">Correo:</label>
+                <input type="text" name= "correo" readonly class="form-control" id="nombre">
+                </div>
+                <!--<div class="form-group">
+                <label for="pais" class="col-form-label">País:</label>
+                <input type="text" class="form-control" id="pais">
+                </div>                
+                <div class="form-group">
+                <label for="edad" class="col-form-label">Edad:</label>
+                <input type="number" class="form-control" id="edad">
+                </div>-->            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                <button type="submit" id="btnGuardar" class="btn btn-dark">Aceptar</button>
+            </div>
+        </form>    
+        </div>
+    </div>
+</div>  
+
+<div class="modal fade" id="modalCRUD2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header2">
+                <h5 class="modal-title2" id="exampleModalLabel2"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <form id="formPersonas2" method="GET" action="http://127.0.0.1:5000/d">    
+            <div class="modal-body">
+                <div class="form-group">
+                <label for="nombre" class="col-form-label">Correo:</label>
+                <input type="text" name= "correo" readonly class="form-control" id="nombre2">
+                </div>
+                <!--<div class="form-group">
+                <label for="pais" class="col-form-label">País:</label>
+                <input type="text" class="form-control" id="pais">
+                </div>                
+                <div class="form-group">
+                <label for="edad" class="col-form-label">Edad:</label>
+                <input type="number" class="form-control" id="edad">
+                </div>-->            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                <button type="submit" id="btnGuardar" class="btn btn-dark">Aceptar</button>
+            </div>
+        </form>    
+        </div>
+    </div>
+</div>  
+<div class="modal fade" id="modalCRUD3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header3">
+                <h5 class="modal-title3" id="exampleModalLabel2"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <form id="formPersonas3" method="GET" action="">    
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="pais" class="col-form-label">Licenciatura</label>
+                    <input type="text" class="form-control" id="nombre7">
+                    </div>                
+                    <div class="form-group">
+                    <label for="edad" class="col-form-label">Universidad:</label>
+                    <input type="text" class="form-control" id="nombre8">
+                    </div>
+                    <div class="form-group">
+                        <label for="edad" class="col-form-label">Promedio:</label>
+                        <input type="text" class="form-control" id="nombre9">
+                        </div>  
+                <div class="form-group">
+                <label for="nombre" class="col-form-label">Aptitudes:</label>
+                <textarea type="text" name= "correo" readonly class="form-control" id="nombre3"></textarea>
+                </div>
+            <div class="form-group">
+                <label for="nombre" class="col-form-label">Experiencia:</label>
+                <textarea type="text" name= "correo" readonly class="form-control" id="nombre4"></textarea>
+                </div>
+            <div class="form-group">
+                <label for="nombre" class="col-form-label">Cursos:</label>
+                <textarea type="text" name= "correo" readonly class="form-control" id="nombre5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="nombre" class="col-form-label">Idiomas:</label>
+                    <textarea type="text" name= "correo" readonly class="form-control" id="nombre6"></textarea>
+                    </div>           
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">OK</button>
+            </div>
+        </form>    
+        </div>
+    </div>
+</div>  
+
+
+      
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="../static/file/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../static/file/popper/popper.min.js"></script>
+    <script src="../static/file/bootstrap/js/bootstrap.min.js"></script>
+      
+    <!-- datatables JS -->
+    <script type="text/javascript" src="../static/file/datatables/datatables.min.js"></script>    
+     
+    <script type="text/javascript" src="../static/file/main11 copy 12.js"></script>  
+    
+    
+  </body>
+</html>

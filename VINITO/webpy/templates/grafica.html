@@ -1,0 +1,37 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<canvas id="grafica" width="400" height="400"></canvas>
+
+<script>
+/*que hace la libreria d3*/
+d3.csv("../static/file/redes.csv" ,
+function cargarGrafica(data) {
+
+      var redsocial = data.map(function(d) {return d.RedSocial;});
+      var valor = data.map(function(d) {return d.Contador;});
+      console.log(data);
+
+// Grafica de Barras
+      new Chart(document.getElementById("grafica"), {
+          type: 'bar',
+          data: {
+            labels: redsocial,
+            datasets: [
+              {
+                label: "Links utilizados",
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9","#c3c850","#c45850"],
+                data: valor
+              }
+            ]
+          },
+          options: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: 'Redes Sociales Detectadas'
+            }
+          }
+      });
+
+    });
+</script>
